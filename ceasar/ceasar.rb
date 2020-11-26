@@ -1,10 +1,6 @@
 
 def ceasar (message, decalage)
 	result=""
-	#Variable avec aplhabet
-	alpha ="abcdefghijklmnopqrstuvwxyz"
-	#tableau avec alphabet
-	alpha = alpha.split('')
 	#tableau du message
 	message = message.split('')
 	message.each{|car|
@@ -14,25 +10,45 @@ def ceasar (message, decalage)
 end
 
 
-def decale_letter (letter, decalage)
-	alpha ="abcdefghijklmnopqrstuvwxyz"
-	alpha = alpha.split('')
-	alpha.each_with_index {|l, i|
-		if letter == l
-			if i+decalage <26
-				return alpha[i+decalage]
-			else
-				return alpha[i+decalage-26]
-			end
-		elsif letter == l.upcase
-			if i+decalage <26
-				return alpha[i+decalage].upcase
-			else
-				return alpha[i+decalage-26].upcase
-			end
+def decale_letter (letter, decallage)
+	letter_dec = letter.ord
+	puts "Valeur decimal #{letter_dec}"
+
+	minMin = "a".ord
+	maxMin = "z".ord
+	minMaj = "A".ord
+	maxMaj ="Z".ord
+	#gestion minuscule
+	if letter_dec >= minMin and letter_dec <= maxMin
+		#Gestion decalage minuscule
+		puts "Lettre #{letter} decimal #{letter_dec} limite#{maxMin}"
+		if letter_dec + decallage < maxMin
+			d_letter = letter_dec + decallage
+			puts "Decallage classique Nouvelle Valeur decimal #{letter_dec}"
+			return d_letter.chr
+		else
+			d_letter = letter_dec + decallage - 26
+			puts "Decallage supérieur Nouvelle Valeur decimal #{d_letter}"
+			return d_letter.chr
 		end
-	} 
+	end
+
+	#Gestion majuscule
+	if letter_dec >= minMaj and letter_dec <= maxMaj
+		#Gestion decalage majuscule
+		if letter_dec + decallage < maxMaj
+			d_letter = letter_dec + decallage
+			return d_letter.chr
+		else
+			d_letter = letter_dec + decallage - 26
+			return d_letter.chr
+		end
+	end
+
+	return letter
 end
 
 
-puts  ceasar("Abcz",1)
+puts ceasar("az",2)
+puts ceasar("AZ", 2)
+puts ceasar("What a string!",31)
