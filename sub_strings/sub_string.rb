@@ -21,4 +21,5 @@ dictionary = ["below","down","go","going","horn","how","howdy","it","i","low","o
 
 puts(substrings("Howdy partner, sit down! How's it going?",dictionary))
 
+#test
 
